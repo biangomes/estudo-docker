@@ -386,3 +386,40 @@ Supondo um contexto diferente da nossa aplicação em que queremos utilizar o co
 
 - [ ]  Rever `ARG`
 - [ ]  Rever `ENV`
+
+# Docker essencial para o desenvolvedor - Udemy
+
+### Seção 5: Docker e imagens
+
+Quando falamos de containers, as imagens são modelos/templates na qual usamos para criar containers.
+
+Podemos criar um container com uma imagem com a linguagem Python contendo suporte de comunicação com banco de dados, outra imagem com um servidor de banco de dados e outra imagem com servidor web Nginx.
+
+Uma imagem é criada a partir de um arquivo `Dockerfile`, que é um arquivo que comporta as configurações, instruções específicas para criar a imagem.
+
+Se rodarmos:
+
+- `docker run python` => será criado um container com a imagem do Python;
+
+- `docker run postgres` => será criado um container com a imagem do Postgres.
+
+Após criarmos um container a partir de uma imagem, esta imagem fica armazenada no nosso computador local. Se criamos outro container que precise da mesma imagem do primeiro, ela não será baixada novamente a menos que tenha deletado.
+
+
+#### Sistema de arquivos em camadas
+
+Um dos tópicos mais importantes do docker é o *filesystem*, que é o **sistema de arquivos** utilizado pela ferramenta. O *filesystem* do Docker é chamado de **_Layerd_**, que é um sistema de arquivos em camadas.
+
+Um exemplo de filesystem é o do Linux.
+
+![sistema de arquivos em camadas do Linux](img/filesystem-linux.png)
+
+Resumidamente, o sistema de arquivos do Linux possui basicamente duas camadas:
+
+- `bootfs`: sistema de boot do SO e o Kernel;
+
+- `rootfs`: inclui o filesystem do SO, arquitetura de diretórios (/dev, /proc, /bin, etc), bem como os arquivos de configuração e binários do sistema operacional.
+
+Quando o SO é iniciado, o `rootfs` carrega em modo de somente leitura, verifica a integridade e depois remonta para leitura e escrita.
+
+No Docker, a arquitetura é praticamente a mesma. A diferença é que a camada de escrita não é o `rootfs` em si e sim uma abstração do mesmo. A consequência disso é que o container torna-se **portável**, pois as mudanças realizadas são aplicadas na camada que o sistema visualiza.
