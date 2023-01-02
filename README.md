@@ -423,3 +423,39 @@ Resumidamente, o sistema de arquivos do Linux possui basicamente duas camadas:
 Quando o SO é iniciado, o `rootfs` carrega em modo de somente leitura, verifica a integridade e depois remonta para leitura e escrita.
 
 No Docker, a arquitetura é praticamente a mesma. A diferença é que a camada de escrita não é o `rootfs` em si e sim uma abstração do mesmo. A consequência disso é que o container torna-se **portável**, pois as mudanças realizadas são aplicadas na camada que o sistema visualiza.
+
+> **Imagens são compartilhadas entre containers Docker**.
+
+**Comandos práticos**
+
+```
+# Versão do docker
+docker --version
+
+# Help do docker
+docker --help
+
+# Listagem de todos os containers
+docker container ls
+
+# Help para um comando especifico
+docker container --help
+docker ps --help
+
+# Listagem de todos os containers em execucao
+docker ps
+
+# Listagem de todos os containers que NAO estao em execucao
+docker ps -a
+
+# Baixa e cria um container com a imagem. postgres eh um exemplo
+docker pull postgres
+
+# Listar todas as imagens baixadas
+docker image ls
+
+# Remover uma imagem
+docker image rm a26eb6069868
+```
+
+Quando damos um `docker pull postgres`. Por default ele baixa a última tag. Não é recomendável sempre baixar a última e sim pelo número dela (~a mais estável~).
